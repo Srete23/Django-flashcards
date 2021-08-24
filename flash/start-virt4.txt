@@ -1,0 +1,3 @@
+cd c/Users/Stuart/source/repos/Codemy-Website-Flash/flash/
+source virt4/Scripts/activate
+python manage.py runserver
