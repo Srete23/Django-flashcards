@@ -14,8 +14,8 @@ def add(request):
         old_num_2 = request.POST['old_num_2']
         
          # Error handling if no answer is entered in Form
-        if not answer:
-            my_answer = "ERROR - No sum was entered! "
+        if not answer.isnumeric() or not answer < 0:
+            my_answer = "ERROR - No valid answer was entered! - Try again! "
             color = 'warning'
             return render(request, 'add.html', {
             'my_answer':my_answer,
@@ -63,7 +63,7 @@ def subtract(request):
         
          # Error handling if no answer is entered in Form
         if not answer:
-            my_answer = "ERROR - No difference was entered! "
+            my_answer = "ERROR - No valid answer was entered! - Try again! "
             color = 'warning'
             return render(request, 'subtract.html', {
             'my_answer':my_answer,
@@ -110,8 +110,8 @@ def multiply(request):
         old_num_2 = request.POST['old_num_2']
         
          # Error handling if no answer is entered in Form
-        if not answer:
-            my_answer = "ERROR - No product was entered! "
+        if not answer.isnumeric():
+            my_answer = "ERROR - No valid answer was entered! - Try again! "
             color = 'warning'
             return render(request, 'multiply.html', {
             'my_answer':my_answer,
@@ -158,8 +158,8 @@ def divide(request):
         old_num_2 = request.POST['old_num_2']
         
         # Error handling if no answer is entered in Form
-        if not answer:
-            my_answer = "ERROR - No value was entered! "
+        if not answer.isnumeric():
+            my_answer = "ERROR - No valid answer was entered! - Try again! "
             color = 'warning'
             return render(request, 'divide.html', {
             'my_answer':my_answer,
@@ -193,4 +193,52 @@ def divide(request):
         'num_2' :num_2,
     })
 
-
+# Elements page
+def elements(request):
+    from random import randint
+    
+    num_1 = randint(1001, 1118)
+    num_2 = randint(1001, 1118)
+    if request.method == "POST":
+        answer = request.POST['answer']
+        old_num_1 = request.POST['old_num_1']
+        old_num_2 = request.POST['old_num_2']
+        
+         # Error handling if no answer is entered in Form
+        if not answer:
+            my_answer = "ERROR - No sums was entered! "
+            color = 'warning'
+            return render(request, 'elements.html', {
+            'my_answer':my_answer,
+            'answer' :answer,
+            'num_1' :num_1,
+            'num_2' :num_2,
+            'color' :color,
+            })
+        
+        
+        old_num_int_1 = int(old_num_1) - 1000
+        old_num_int_2 = int(old_num_2) - 1000
+        correct_answer = old_num_int_1 + old_num_int_2
+        if int(answer) == (correct_answer):
+            my_answer = "Correct!  " + str(old_num_int_1) + " + " + str(old_num_int_2) + " = " + answer
+            color = "success"
+        else:
+            my_answer = "Incorrect!  " + str(old_num_int_1) + " + " + str(old_num_int_2) + " is not " + answer + " it is " + str(correct_answer)  
+            color = "danger"
+        
+        
+        
+        return render(request , 'elements.html', {
+            'answer' :answer,
+            'my_answer' :my_answer,
+            'num_1' :num_1,
+            'num_2' :num_2,
+            'color' :color,
+            })
+    
+        
+    return render(request, 'elements.html', {
+        'num_1' :num_1,
+        'num_2' :num_2,
+    })
