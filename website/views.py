@@ -14,7 +14,7 @@ def add(request):
         old_num_2 = request.POST['old_num_2']
         
          # Error handling if no answer is entered in Form
-        if not answer.isnumeric() or not answer < 0:
+        if not answer.isnumeric():
             my_answer = "ERROR - No valid answer was entered! - Try again! "
             color = 'warning'
             return render(request, 'add.html', {
