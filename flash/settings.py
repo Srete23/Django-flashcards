@@ -1,7 +1,7 @@
 import os
 import django_heroku
-"""import dj_database_url
-from decouple import config"""
+from decouple import config
+import dj_database_url
 
 """
 Django settings for flash project.
@@ -25,7 +25,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b8%fizl6rw#4c9pq85)w#x0=k#6td=r$&6q^i+p5l$!9+eler-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -139,3 +138,7 @@ django_heroku.settings(locals())
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku
+
+SECRET_KEY = config('SECRET_KEY')
