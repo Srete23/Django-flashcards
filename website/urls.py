@@ -7,4 +7,5 @@ urlpatterns = [
     path('subtract.html', views.subtract, name="subtract"),
     path('multiply.html', views.multiply, name="multiply"),
     path('divide.html', views.divide, name="divide"),
+    path('elements.html', views.elements, name="elements"),
 ]
